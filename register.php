@@ -12,13 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $datenaissance = $_POST['datenaissance'] ?? '';
     $password = $_POST['motdepasse'] ?? '';
 
-    // Vérification si le client existe déjà
     $stmt = $pdo->prepare("SELECT count(*) FROM client WHERE idclient = ?");
     $stmt->execute([$idclient]);
     if ($stmt->fetchColumn() > 0) {
         $error = "Cet identifiant client existe déjà.";
     } else {
-        // Hash BCRYPT du mot de passe
         $hash = password_hash($password, PASSWORD_BCRYPT);
         
         $stmt = $pdo->prepare("INSERT INTO client (idclient, nom, prenom, datenaissance, motdepasse) VALUES (?, ?, ?, ?, ?)");
@@ -34,27 +32,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Inscription - Agence de Voyage</title>
+    <title>Inscription - Epsi Voyage</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="auth-card" style="margin-top: 5vh;">
-        <h2>Inscription Client</h2>
-        <?php if($error): ?><div style="color:var(--danger); margin-bottom:15px; text-align:center;"><?= htmlspecialchars($error) ?></div><?php endif; ?>
-        <?php if($success): ?><div style="color:var(--success); margin-bottom:15px; text-align:center;"><?= htmlspecialchars($success) ?></div><?php endif; ?>
+    <?php include 'navbar.php' ?>
+
+    <div class="auth-card" style="margin-top: 3rem;">
+        <h2>Créer un compte</h2>
+        <?php if($error): ?><div class="alert alert-error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
+        <?php if($success): ?><div class="alert alert-success"><?= htmlspecialchars($success) ?></div><?php endif; ?>
         
-        <form method="POST" action="register.php">
+        <form method="POST">
             <div class="form-group">
-                <label>Identifiant (Ex: C003)</label>
-                <input type="text" name="idclient" required>
+                <label>Identifiant Client</label>
+                <input type="text" name="idclient" required placeholder="Ex: C003">
             </div>
-            <div class="form-group">
-                <label>Nom</label>
-                <input type="text" name="nom" required>
-            </div>
-            <div class="form-group">
-                <label>Prénom</label>
-                <input type="text" name="prenom" required>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                <div class="form-group">
+                    <label>Nom</label>
+                    <input type="text" name="nom" required>
+                </div>
+                <div class="form-group">
+                    <label>Prénom</label>
+                    <input type="text" name="prenom" required>
+                </div>
             </div>
             <div class="form-group">
                 <label>Date de naissance</label>
@@ -64,8 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label>Mot de passe</label>
                 <input type="password" name="motdepasse" required>
             </div>
-            <button type="submit" class="btn">S'inscrire</button>
-            <a href="index.php" class="btn btn-secondary">Retour à la connexion</a>
+            <button type="submit" class="btn btn-primary" style="width:100%;">S'inscrire</button>
+            <p style="text-align:center; margin-top:20px; font-size:0.9rem;">
+                Déjà un compte ? <a href="login.php" style="color:var(--primary);">Se connecter</a>
+            </p>
         </form>
     </div>
 </body>

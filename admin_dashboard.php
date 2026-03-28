@@ -44,15 +44,7 @@ $circuits = $pdo->query("SELECT * FROM Circuit ORDER BY identifiant DESC")->fetc
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <div class="logo">Espace Administrateur</div>
-        <div>
-            <a href="admin_dashboard.php" style="color:var(--primary)">Circuits</a>
-            <a href="#" style="opacity:0.5" title="Page en construction">Étapes & Lieux</a>
-            <a href="#" style="opacity:0.5" title="Page en construction">Clients</a>
-            <a href="logout.php" class="logout">Déconnexion</a>
-        </div>
-    </div>
+    <?php include 'navbar.php' ?>
 
     <div class="container">
         <h2>Gestion des Circuits (CRUD)</h2>
