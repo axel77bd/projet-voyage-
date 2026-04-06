@@ -20,9 +20,21 @@ if (session_status() === PHP_SESSION_NONE) {
                     <?php endif; ?>
                 </span>
             <?php else: ?>
-                <a href="admin_dashboard.php">Gestion Circuits</a>
-                <a href="#">Étapes</a>
-                <a href="#">Clients</a>
+                <div class="dropdown">
+                    <a href="admin_dashboard.php">Gestion Circuits</a>
+                </div>
+                <div class="dropdown">
+                    <a href="admin_etapes.php">Étapes</a>
+                </div>
+                <div class="dropdown">
+                    <a href="admin_lieux.php">Lieux</a>
+                </div>
+                <div class="dropdown">
+                    <a href="admin_clients.php">Clients</a>
+                </div>
+                <div class="dropdown">
+                    <a href="admin_admins.php">Administrateurs</a>
+                </div>
             <?php endif; ?>
             <a href="logout.php" class="btn-logout">Déconnexion</a>
         <?php else: ?>
