@@ -105,52 +105,44 @@ if (isset($_POST['valider_connexion'])) {
     <meta charset="UTF-8">
     <title>Connexion - Epsi Voyage</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Reprise d'un style simple comme dans l'exemple "Bootstrap" demandé par moment -->
-    <style>
-        .form-label { font-weight: bold; margin-bottom: 5px; display: block; }
-        .form-control { width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; }
-        .btn-primary { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; width: 100%; }
-        .btn-primary:hover { background-color: #0056b3; }
-        .alert-error { color: #842029; background-color: #f8d7da; padding: 10px; border-radius: 5px; margin-bottom: 15px; }
-    </style>
 </head>
 <body>
     <?php include 'navbar.php' ?>
 
-    <div class="auth-card" style="max-width: 400px; margin: 50px auto; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 8px;">
-        <h2 style="text-align: center;">Se connecter</h2>
+    <div class="auth-card">
+        <h2>Se connecter</h2>
         
         <?php 
         // Afficher un message d'erreur s'il y en a un
         if (!empty($error)) { 
-            echo '<div class="alert-error">' . $error . '</div>';
+            echo '<div class="alert alert-error">' . $error . '</div>';
         } 
         ?>
         
         <form method="POST" action="login.php">
             
-            <div>
-                <label class="form-label mt-4">Type de compte</label>
-                <select name="type_compte" class="form-control">
-                    <option value="client">Je suis Client</option>
-                    <option value="admin">Je suis Administrateur</option>
+            <div class="form-group">
+                <label>Type de compte</label>
+                <select name="type_compte">
+                    <option value="client">Client</option>
+                    <option value="admin">Administrateur</option>
                 </select>
             </div>
             
-            <div>
-                <label class="form-label">Identifiant</label>
-                <input name="identifiant" type="text" class="form-control" placeholder="Entrez votre identifiant">
+            <div class="form-group">
+                <label>Identifiant</label>
+                <input name="identifiant" type="text" required placeholder="Ex: C001 ou admin">
             </div>
             
-            <div>
-                <label class="form-label">Mot de passe</label>
-                <input name="motdepasse" type="password" class="form-control" placeholder="Entrez votre mot de passe">
+            <div class="form-group">
+                <label>Mot de passe</label>
+                <input name="motdepasse" type="password" required>
             </div>
             
-            <button name="valider_connexion" type="submit" class="btn btn-primary mt-4">VALIDER</button>
+            <button name="valider_connexion" type="submit" class="btn btn-primary">Se connecter</button>
             
             <p style="text-align:center; margin-top:20px; font-size:0.9rem;">
-                Pas encore de compte client ? <a href="register.php" style="color: #007bff;">S'inscrire</a>
+                Pas de compte ? <a href="register.php" style="color:var(--primary);">S'inscrire</a>
             </p>
         </form>
     </div>

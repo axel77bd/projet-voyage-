@@ -76,67 +76,54 @@ if (isset($_POST['valider_inscription'])) {
     <meta charset="UTF-8">
     <title>Inscription - Epsi Voyage</title>
     <link rel="stylesheet" href="style.css">
-    
-    <!-- Reprise d'un style simple type Bootstrap -->
-    <style>
-        .form-label { font-weight: bold; margin-bottom: 5px; display: block; }
-        .form-control { width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; }
-        .btn-primary { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; width: 100%; display: block; margin-top: 15px;}
-        .btn-primary:hover { background-color: #0056b3; }
-        .alert-error { color: #842029; background-color: #f8d7da; padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center; }
-        .alert-success { color: #0f5132; background-color: #d1e7dd; padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center; }
-        
-        .row { display: flex; gap: 15px; }
-        .col { flex: 1; }
-    </style>
 </head>
 <body>
     <?php include 'navbar.php' ?>
 
-    <div class="auth-card" style="max-width: 500px; margin: 40px auto; padding: 30px; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 8px;">
-        <h2 style="text-align: center; margin-top: 0;">Créer un compte</h2>
+    <div class="auth-card" style="margin-top: 3rem;">
+        <h2>Créer un compte</h2>
         
         <?php 
         // Affichage des messages d'erreur ou de succès avec des conditions simples
         if (!empty($error)) { 
-            echo '<div class="alert-error">' . $error . '</div>';
+            echo '<div class="alert alert-error">' . $error . '</div>';
         }
         if (!empty($success)) { 
-            echo '<div class="alert-success">' . $success . '</div>';
+            echo '<div class="alert alert-success">' . $success . '</div>';
         }
         ?>
         
         <form method="POST" action="register.php">
-            <div>
-                <label class="form-label">Identifiant (Pseudo)</label>
-                <input type="text" name="idclient" class="form-control" placeholder="Ex: C003">
+            <div class="form-group">
+                <label>Identifiant Client</label>
+                <input type="text" name="idclient" required placeholder="Ex: C003">
             </div>
             
-            <div class="row">
-                <div class="col">
-                    <label class="form-label">Nom</label>
-                    <input type="text" name="nom" class="form-control" placeholder="Entrez votre nom">
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                <div class="form-group">
+                    <label>Nom</label>
+                    <input type="text" name="nom" required>
                 </div>
-                <div class="col">
-                    <label class="form-label">Prénom</label>
-                    <input type="text" name="prenom" class="form-control" placeholder="Entrez votre prénom">
+                <div class="form-group">
+                    <label>Prénom</label>
+                    <input type="text" name="prenom" required>
                 </div>
             </div>
             
-            <div>
-                <label class="form-label">Date de naissance</label>
-                <input type="date" name="datenaissance" class="form-control">
+            <div class="form-group">
+                <label>Date de naissance</label>
+                <input type="date" name="datenaissance" required>
             </div>
             
-            <div>
-                <label class="form-label">Mot de passe</label>
-                <input type="password" name="motdepasse" class="form-control" placeholder="Entrez un mot de passe">
+            <div class="form-group">
+                <label>Mot de passe</label>
+                <input type="password" name="motdepasse" required>
             </div>
             
-            <button type="submit" name="valider_inscription" class="btn btn-primary">S'INSCRIRE</button>
+            <button type="submit" name="valider_inscription" class="btn btn-primary" style="width:100%;">S'inscrire</button>
             
             <p style="text-align:center; margin-top:20px; font-size:0.9rem;">
-                Vous avez déjà un compte ? <a href="login.php" style="color:#007bff; font-weight:bold;">Se connecter</a>
+                Déjà un compte ? <a href="login.php" style="color:var(--primary);">Se connecter</a>
             </p>
         </form>
     </div>
